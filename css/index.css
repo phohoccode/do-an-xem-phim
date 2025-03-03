@@ -1,9 +1,113 @@
 img {
+  display: block;
+  height: 100%;
   object-fit: cover;
+  width: 100%;
   transition: all 0.3s;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .slide-show img {
   width: 100%;
   height: 50vh;
+}
+
+.card-movie {
+  border: 1px solid #3d47514d;
+  border-radius: 6px;
+  height: 320px;
+  overflow: hidden;
+  position: relative;
+  transition: 0.3s;
+}
+
+.card-movie .card-movie-body {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background-color: #ffffff4d;
+  border: 1px solid ccc85;
+  border-radius: 12px;
+  bottom: -100%;
+  left: 8px;
+  padding: 8px;
+  position: absolute;
+  right: 8px;
+  transition: 0.3s;
+}
+
+.card-movie-title {
+  color: #fff;
+  text-shadow: rgba(0, 0, 0, 0.5) 2px 2px;
+}
+
+.card-movie:hover .card-movie-body {
+  bottom: 8px;
+}
+
+.card-movie .card-movie-status {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: end;
+  justify-content: end;
+  gap: 12px;
+}
+
+.card-movie .card-movie-body img {
+  height: 100px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.card-movie:hover img {
+  transform: scale(1.1);
+}
+
+/* ============ trang thông tin phim  ==========*/
+
+.movie-info-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-info-left .movie-info-figure {
+  border: 1px solid #3d47514d;
+  border-radius: 6px;
+  height: 260px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.movie-info-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.movie-info-right .movie-info-title,
+.movie-info-right .movie-info-body,
+.movie-info-right .movie-info-content {
+  background-color: #f0f4f8;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.movie-info-description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.movie-info-trailer {
+  border: 1px solid #3d47514d;
+  border-radius: 6px;
+  height: 320px;
+  overflow: hidden;
+  position: relative;
 }
