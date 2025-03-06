@@ -35,9 +35,35 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 .password-container {
     position: relative;
 }
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Thêm padding bên phải để có chỗ cho icon mắt */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box; /* Đảm bảo kích thước input không bị thay đổi do padding */
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Căn chỉnh mắt vào bên trong ô nhập */
+    transform: translateY(-50%); /* Để căn chỉnh icon vào giữa ô */
+    cursor: pointer;
+    font-size: 18px;
+    color: #007bff;
+}
+
 .btn {
     background: #007bff;
     color: white;
