@@ -1,0 +1,11 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background-color: #22223b;
+  border-bottom: 1px solid #3d4751;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
