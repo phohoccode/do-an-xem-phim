@@ -115,27 +115,41 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quên mật khẩu</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
-<div class="container">
-    <button class="back-button" onclick="history.back()">&#8592;</button>
-    <h2>Quên mật khẩu?</h2>
-    <form method="POST">
-        <div class="input-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" placeholder="Nhập email" required>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
+            <button class="btn btn-outline-secondary btn-sm mb-3" onclick="history.back()">&#8592; Quay lại</button>
+            <h2 class="text-center">Quên mật khẩu?</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" placeholder="Nhập email" required>
+                </div>
+                <div class="mb-3 position-relative">
+                    <label for="new_password" class="form-label">Mật khẩu mới</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="new_password" class="form-control" placeholder="Nhập mật khẩu mới" required>
+                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
+                            <i id="eye-icon" class="fa fa-eye-slash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="verification" class="form-label">Mã xác thực</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="verification" placeholder="Mã xác thực">
+                        <button type="submit" class="btn btn-primary" name="send_code">Gửi mã</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Xác nhận</button>
+            </form>
         </div>
-        <div class="input-group">
-            <label for="new_password">Mật khẩu mới</label>
-            <input type="password" name="new_password" placeholder="Nhập mật khẩu mới" required>
-        </div>
-        <div class="input-group verify-container">
-            <input type="text" name="verification" placeholder="Mã xác thực">
-            <button type="submit" class="verify-btn" name="send_code">Gửi mã</button>
-        </div>
-        <button class="btn" type="submit">Xác nhận</button>
-    </form>
-</div>
+    </div>
 </body>
 </html>
+

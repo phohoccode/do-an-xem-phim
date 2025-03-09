@@ -1,5 +1,5 @@
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Liên kết Font Awesome -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">MOVIES-VLUTE</a>
@@ -36,18 +36,27 @@
           </ul>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search">
+      <form class="d-flex" method="GET" action="index.php">
+        <input class="form-control me-2" type="search" name="search" placeholder="Tìm kiếm phim..." aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
       <div class="ms-4">
-        <?php if (isset($_SESSION['user'])): ?>
-          <a href="logout.php" class="btn btn-danger"> Đăng xuất </a>
-        <?php else: ?>
-          <a href="login.php" class="btn btn-primary"> Đăng nhập </a>
-          <a href="register.php" class="btn btn-light"> Đăng ký </a>
-        <?php endif; ?>
-      </div>
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <div class="d-flex align-items-center">
+            <!-- Profile icon and username -->
+            <a href="profile.php" class="btn btn-light d-flex align-items-center">
+                <i class="fa fa-user me-2"></i>
+                <?php echo htmlspecialchars($_SESSION['username']); ?>
+            </a>
+            <a href="logout.php" class="btn btn-danger ms-2">Đăng xuất</a>
+        </div>
+    <?php else: ?>
+        <!-- Show Login/Register if not logged in -->
+        <a href="login.php" class="btn btn-primary">Đăng nhập</a>
+        <a href="register.php" class="btn btn-light">Đăng ký</a>
+    <?php endif; ?>
+</div>
+
     </div>
   </div>
 </nav>

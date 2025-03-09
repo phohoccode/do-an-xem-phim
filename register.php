@@ -102,50 +102,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
 $conn->close();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
-<div class="container">
-    <h2>Đăng ký</h2>
-    <p>Đăng ký tài khoản để bình luận, đánh giá và lưu những bộ phim yêu thích của bạn.</p>
-    <form method="POST" action="">
-        <div class="input-group">
-            <label for="username">Tên đăng nhập</label>
-            <input type="text" name="username" required placeholder="Nhập tên đăng nhập"
-                   value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
-        </div>
-        <div class="input-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" required placeholder="Nhập email"
-                   value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>">
-        </div>
-        <div class="input-group password-container">
-            <label for="password">Mật khẩu</label>
-        <div class="password-wrapper">
-            <input type="password" name="password" id="password" required placeholder="Nhập mật khẩu" value="<?= isset($_SESSION['password']) ? htmlspecialchars($_SESSION['password']) : '' ?>">
-
-            <span class="eye-icon" onclick="togglePassword()">
-            <i id="eye-icon" class="fa fa-eye-slash"></i>
-        </span>
-        </div>
-        </div>
-        <div class="input-group verify-container">
-            <input type="text" id="verification" name="verification" placeholder="Mã xác thực">
-            <button type="submit" class="verify-btn" name="send_code">Gửi mã</button>
-            <small id="verification-error" style="color: red;"></small>
-        </div>
-        <button class="btn" type="submit" name="register">Đăng ký</button>
-    </form>
-    <p class="register">Đã có tài khoản? <a href="login.php">Đăng nhập</a></p>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg" style="width: 400px;">
+        <h2 class="text-center mb-3">Đăng ký</h2>
+        <p class="text-center">Đăng ký tài khoản để bình luận, đánh giá và lưu những bộ phim yêu thích của bạn.</p>
+        <form method="POST" action="">
+            <div class="mb-3">
+                <label for="username" class="form-label">Tên đăng nhập</label>
+                <input type="text" class="form-control" name="username" required placeholder="Nhập tên đăng nhập"
+                       value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" required placeholder="Nhập email"
+                       value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>">
+            </div>
+            <div class="mb-3 position-relative">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" name="password" id="password" required placeholder="Nhập mật khẩu" value="<?= isset($_SESSION['password']) ? htmlspecialchars($_SESSION['password']) : '' ?>">
+                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
+                        <i id="eye-icon" class="fa fa-eye-slash"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mb-3 d-flex">
+                <input type="text" class="form-control me-2" id="verification" name="verification" placeholder="Mã xác thực">
+                <button type="submit" class="btn btn-primary" name="send_code">Gửi mã</button>
+            </div>
+            <button class="btn btn-success w-100" type="submit" name="register">Đăng ký</button>
+        </form>
+        <p class="text-center mt-3">Đã có tài khoản? <a href="login.php">Đăng nhập</a></p>
+    </div>
 </div>
 </body>
 </html>
