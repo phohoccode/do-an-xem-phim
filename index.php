@@ -40,7 +40,7 @@ foreach ($categories as $type => $className) {
 </head>
 
 <body>
-  <?php include 'navbar1.php'; ?>
+  <?php include 'navbar.php'; ?>
 
   <!-- Slide Show -->
   <section class="slide-show">

@@ -41,7 +41,7 @@ echo "<script>console.log(" . json_encode($category, JSON_PRETTY_PRINT | JSON_UN
 </head>
 
 <body>
-  <?php include 'navbar1.php'; ?>
+  <?php include 'navbar.php'; ?>
 
   <div class="container mt-5 mb-5">
     <div class="row">

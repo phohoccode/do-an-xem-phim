@@ -51,7 +51,7 @@ $movie = $response['movie'];
 
 <body>
 
-  <?php include 'navbar1.php'; ?>
+  <?php include 'navbar.php'; ?>
 
   <div class="movie-watch-container">
 
