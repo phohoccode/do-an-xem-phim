@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+include 'connect.php';
 include "./utils/index.php";
 
 // định nghĩa base url
@@ -38,7 +41,7 @@ echo "<script>console.log(" . json_encode($category, JSON_PRETTY_PRINT | JSON_UN
 </head>
 
 <body>
-  <?php include 'navbar.php'; ?>
+  <?php include 'navbar1.php'; ?>
 
   <div class="container mt-5 mb-5">
     <div class="row">

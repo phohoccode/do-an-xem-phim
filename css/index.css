@@ -11,6 +11,233 @@ a {
   color: inherit;
 }
 
+.group {
+  display: flex;
+  line-height: 28px;
+  align-items: center;
+  position: relative;
+  max-width: 260px;
+}
+
+.input {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  height: 36px;
+  padding-left: 2.5rem;
+  box-shadow: 0 0 0 1.5px #2b2c37, 0 0 25px -17px #000;
+  border: 0;
+  border-radius: 12px;
+  background-color: #4a4e69;
+  outline: none;
+  color: #bdbecb;
+  transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: text;
+  z-index: 0;
+}
+
+.input::placeholder {
+  color: #bdbecb;
+}
+
+.input:hover {
+  box-shadow: 0 0 0 2.5px #2f303d, 0px 0px 25px -15px #000;
+}
+
+.input:active {
+  transform: scale(0.95);
+}
+
+.input:focus {
+  box-shadow: 0 0 0 2.5px #2f303d;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  fill: #bdbecb;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* button login */
+
+.btn-login {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem;
+  background-color: #ffbe0b;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffff;
+  gap: 10px;
+  height: 36px;
+  font-weight: bold;
+  border: 3px solid #ffffff4d;
+  outline: none;
+  overflow: hidden;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-login:hover {
+  transform: scale(1.05);
+  border-color: #fff9;
+}
+
+.btn-login:hover .icon {
+  transform: translate(4px);
+}
+
+.btn-login:hover::before {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.btn-login::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+
+/* header */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background-color: #22223b;
+  border-bottom: 1px solid #3d4751;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  height: 64px;
+  z-index: 1000;
+}
+
+nav .nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+nav .logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffbe0b;
+  text-decoration: none;
+}
+
+nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  list-style: none;
+  padding-left: 0;
+}
+
+nav .nav-links .nav-item {
+  padding: 8px 16px;
+  color: #fff;
+  border-radius: 6px;
+  transition: 0.3s;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+nav .nav-links .nav-item:hover {
+  color: #ffbe0b;
+}
+
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+  padding: 8px 16px;
+}
+
+.dropdown .title {
+  color: #fff;
+  cursor: pointer;
+}
+
+.sub-menu {
+  position: absolute;
+  background-color: #4a4e69;
+  top: 100%;
+  left: 0;
+  min-width: 320px;
+  max-width: 520px;
+  display: none;
+  flex-wrap: wrap;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+.sub-menu li {
+  list-style: none;
+}
+
+.sub-menu a {
+  padding: 10px 20px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  flex: auto;
+}
+
+.sub-menu a:hover {
+  color: #ffbe0b;
+}
+
+/* Hiển thị dropdown khi hover */
+.dropdown:hover .sub-menu {
+  display: flex;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .slide-show img {
   width: 100%;
   height: 50vh;
@@ -110,4 +337,59 @@ a {
   height: 320px;
   overflow: hidden;
   position: relative;
+}
+
+/* Trang xem phim */
+.movie-watch-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #22223b;
+  min-height: 100vh;
+}
+
+.episode-box {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  margin-top: 32px;
+  padding: 16px;
+  border: 3px solid #4a4e69;
+  border-radius: 16px;
+}
+
+.movie-watch-container .episode-name {
+  color: #f8f8f2;
+  font-size: 2rem;
+  margin: 24px 0;
+}
+
+.episode-box .episode-title {
+  color: #f8f8f2;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.episode-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.episode-item {
+  border: 1px solid #3d47514d;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  transition: 0.3s;
+  padding: 8px 16px;
+  display: block;
+  background-color: #4a4e69;
+  text-decoration: none;
+  color: #f0f4f8;
+}
+
+.episode-item.active {
+  color: #22223b;
+  background-color: #ffbe0b;
 }
