@@ -2,7 +2,7 @@
     $host = "localhost";
     $user = "root";
     $password = "";
-    $database = "webphim";
+    $database = "do-an-1";
 
     $conn = new mysqli($host, $user, $password, $database);
 
