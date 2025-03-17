@@ -1,118 +1,42 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f3f4f6;
-}
-.container {
-    position: relative;
-    width: 500px;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 50px auto;
-}
-.container h2 {
-    margin-bottom: 20px;
-}
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
-    position: relative;
-}
-.input-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.card {
+  background-color: #22223b !important; /* Màu nền tối */
+  color: hsl(0, 0%, 100%); /* Màu chữ trắng */
+  border-radius: 10px; 
 }
 
-.password-container {
-    position: relative;
+.form-control {
+  background-color: #495057; /* Màu input tối */
+  color: #fff;
+  border: 1px solid #6c757d;
 }
 
-.password-wrapper {
-    position: relative;
-    width: 100%;
+.form-control::placeholder {
+  color: #ccc;
 }
 
-.password-wrapper input {
-    width: 100%;
-    padding: 10px 40px 10px 10px; /* Thêm padding bên phải để có chỗ cho icon mắt */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    box-sizing: border-box; /* Đảm bảo kích thước input không bị thay đổi do padding */
+.input-group .btn-outline-secondary {
+  background-color: #495057;
+  color: #fff;
+  border: 1px solid #6c757d;
 }
 
-.eye-icon {
-    position: absolute;
-    top: 50%;
-    right: 10px; /* Căn chỉnh mắt vào bên trong ô nhập */
-    transform: translateY(-50%); /* Để căn chỉnh icon vào giữa ô */
-    cursor: pointer;
-    font-size: 18px;
-    color: #007bff;
+.btn-custom-yellow {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+  color: #000 !important;
 }
 
-.btn {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    border-radius: 5px;
-    cursor: pointer;
+.btn-custom-yellow:hover {
+  background-color: #e0a800 !important;
+  border-color: #d39e00 !important;
 }
-.btn:hover {
-    background: #0056b3;
+
+.btn-verification-grey {
+  background-color: #7e7e7e !important;
+  border-color: #7e7e7e !important;
+  color: #000 !important;
 }
-.forgot-password {
-    display: block;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #007bff;
-    text-decoration: none;
-}
-.register {
-    margin-top: 15px;
-    font-size: 14px;
-}
-.register a {
-    color: #007bff;
-    text-decoration: none;
-}
-.verify-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.verify-container input {
-    flex: 1;
-    margin-right: 10px;
-}
-.verify-btn {
-    background: #ccc;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.back-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #007bff;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
+.btn-verification-grey:hover {
+  background-color: #4d4d4d !important;
+  border-color: #4d4d4d !important;
 }

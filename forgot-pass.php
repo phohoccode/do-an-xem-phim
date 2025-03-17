@@ -115,16 +115,16 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quên mật khẩu</title>
+    <link rel="stylesheet" href="css/login.css?v=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
             <button class="btn btn-outline-secondary btn-sm mb-3" onclick="history.back()">&#8592; Quay lại</button>
-            <h2 class="text-center">Quên mật khẩu?</h2>
+            <h2 class="text-center text-warning">Quên mật khẩu?</h2>
             <form method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -135,7 +135,7 @@ $conn->close();
                     <div class="input-group">
                         <input type="password" class="form-control" name="new_password" class="form-control" placeholder="Nhập mật khẩu mới" required>
                         <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
-                            <i id="eye-icon" class="fa fa-eye-slash"></i>
+                        <i id="eye-icon" class="fa fa-eye-slash"></i>
                         </button>
                     </div>
                 </div>
@@ -143,10 +143,10 @@ $conn->close();
                     <label for="verification" class="form-label">Mã xác thực</label>
                     <div class="input-group">
                         <input type="text" class="form-control" name="verification" placeholder="Mã xác thực">
-                        <button type="submit" class="btn btn-primary" name="send_code">Gửi mã</button>
+                        <button type="submit" class="btn-verification-grey" name="send_code">Gửi mã</button>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success w-100">Xác nhận</button>
+                <button type="submit" class="btn btn-custom-yellow w-100">Xác nhận</button>
             </form>
         </div>
     </div>

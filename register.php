@@ -108,16 +108,16 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký</title>
+    <link rel="stylesheet" href="css/login.css?v=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-lg" style="width: 400px;">
-        <h2 class="text-center mb-3">Đăng ký</h2>
-        <p class="text-center">Đăng ký tài khoản để bình luận, đánh giá và lưu những bộ phim yêu thích của bạn.</p>
+        <h2 class="text-center mb-3 text-warning">Đăng ký</h2>
+        <p class="text-center text-warning">Đăng ký tài khoản để bình luận, đánh giá và lưu những bộ phim yêu thích của bạn.</p>
         <form method="POST" action="">
             <div class="mb-3">
                 <label for="username" class="form-label">Tên đăng nhập</label>
@@ -140,11 +140,11 @@ $conn->close();
             </div>
             <div class="mb-3 d-flex">
                 <input type="text" class="form-control me-2" id="verification" name="verification" placeholder="Mã xác thực">
-                <button type="submit" class="btn btn-primary" name="send_code">Gửi mã</button>
+                <button type="submit" class="btn btn-verification-grey" name="send_code">Gửi mã</button>
             </div>
-            <button class="btn btn-success w-100" type="submit" name="register">Đăng ký</button>
+            <button class="btn btn-custom-yellow w-100" type="submit" name="register">Đăng ký</button>
         </form>
-        <p class="text-center mt-3">Đã có tài khoản? <a href="login.php">Đăng nhập</a></p>
+        <p class="text-center mt-3 text-white">Đã có tài khoản? <a href="login.php" class="text-warning">Đăng nhập</a></p>
     </div>
 </div>
 </body>

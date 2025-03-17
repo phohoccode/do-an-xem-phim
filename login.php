@@ -40,16 +40,15 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
+    <link rel="stylesheet" href="css/login.css?v=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
-    
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
         <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
-            <h3 class="text-center mb-4">Đăng nhập</h3>
+            <h3 class="text-center mb-4 text-warning">Đăng nhập</h3>
             <form method="POST" action="">
                 <div class="mb-3">
                     <label for="username" class="form-label">Tên đăng nhập</label>
@@ -64,14 +63,13 @@ $conn->close();
                         </button>
                     </div>
                 </div>
-                <button class="btn btn-primary w-100" type="submit">Đăng nhập</button>
+                <button class="btn btn-custom-yellow w-100" type="submit">Đăng nhập</button>
             </form>
             <div class="text-center mt-3">
-                <a href="forgot-pass.php" class="text-decoration-none">Quên mật khẩu?</a>
+                <a href="forgot-pass.php" class="text-decoration-none text-warning">Quên mật khẩu?</a>
             </div>
-            <p class="text-center mt-3">Chưa có tài khoản? <a href="register.php">Đăng ký</a></p>
+            <p class="text-center mt-3 text-white">Chưa có tài khoản? <a href="register.php" class="text-warning">Đăng ký</a></p>
         </div>
     </div>
 </body>
 </html>
-
