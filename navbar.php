@@ -2,94 +2,94 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <nav>
   <div class="nav-left">
-    <a class="logo" href="/">VLUTE-FILM</a>
+    <a class="logo" href="/do-an-xem-phim">VLUTE-FILM</a>
     <ul class="nav-links">
       <li>
-        <a href="" class="nav-item">Trang chủ</a>
+        <a href="/do-an-xem-phim" class="nav-item">Trang chủ</a>
       </li>
       <li>
-        <a href="" class="nav-item">Phim bộ</a>
+        <a href="/do-an-xem-phim/chi-tiet.php?describe=danh-sach&type=phim-bo" class="nav-item">Phim bộ</a>
       </li>
       <li>
-        <a href="" class="nav-item">Phim lẻ</a>
+        <a href="/do-an-xem-phim/chi-tiet.php?describe=danh-sach&type=phim-le" class="nav-item">Phim lẻ</a>
       </li>
       <li>
-        <a href="" class="nav-item">Hoạt hình</a>
+        <a href="/do-an-xem-phim/chi-tiet.php?describe=danh-sach&type=hoat-hinh" class="nav-item">Hoạt hình</a>
       </li>
       <li class="dropdown">
         <span class="title">Thể loại</span>
         <ul class="sub-menu">
-          <li><a href="/the-loai/hanh-dong" class="nav-item">Hành Động</a></li>
-          <li><a href="/the-loai/mien-tay" class="nav-item">Miền Tây</a></li>
-          <li><a href="/the-loai/tre-em" class="nav-item">Trẻ Em</a></li>
-          <li><a href="/the-loai/lich-su" class="nav-item">Lịch Sử</a></li>
-          <li><a href="/the-loai/co-trang" class="nav-item">Cổ Trang</a></li>
-          <li><a href="/the-loai/chien-tranh" class="nav-item">Chiến Tranh</a></li>
-          <li><a href="/the-loai/vien-tuong" class="nav-item">Viễn Tưởng</a></li>
-          <li><a href="/the-loai/kinh-di" class="nav-item">Kinh Dị</a></li>
-          <li><a href="/the-loai/tai-lieu" class="nav-item">Tài Liệu</a></li>
-          <li><a href="/the-loai/bi-an" class="nav-item">Bí Ẩn</a></li>
-          <li><a href="/the-loai/phim-18" class="nav-item">Phim 18+</a></li>
-          <li><a href="/the-loai/tinh-cam" class="nav-item">Tình Cảm</a></li>
-          <li><a href="/the-loai/tam-ly" class="nav-item">Tâm Lý</a></li>
-          <li><a href="/the-loai/the-thao" class="nav-item">Thể Thao</a></li>
-          <li><a href="/the-loai/phieu-luu" class="nav-item">Phiêu Lưu</a></li>
-          <li><a href="/the-loai/am-nhac" class="nav-item">Âm Nhạc</a></li>
-          <li><a href="/the-loai/gia-dinh" class="nav-item">Gia Đình</a></li>
-          <li><a href="/the-loai/hoc-duong" class="nav-item">Học Đường</a></li>
-          <li><a href="/the-loai/hai-huoc" class="nav-item">Hài Hước</a></li>
-          <li><a href="/the-loai/hinh-su" class="nav-item">Hình Sự</a></li>
-          <li><a href="/the-loai/vo-thuat" class="nav-item">Võ Thuật</a></li>
-          <li><a href="/the-loai/khoa-hoc" class="nav-item">Khoa Học</a></li>
-          <li><a href="/the-loai/than-thoai" class="nav-item">Thần Thoại</a></li>
-          <li><a href="/the-loai/chinh-kich" class="nav-item">Chính Kịch</a></li>
-          <li><a href="/the-loai/kinh-dien" class="nav-item">Kinh Điển</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=hanh-dong" class="nav-item">Hành Động</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=mien-tay" class="nav-item">Miền Tây</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=tre-em" class="nav-item">Trẻ Em</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=lich-su" class="nav-item">Lịch Sử</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=co-trang" class="nav-item">Cổ Trang</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=chien-tranh" class="nav-item">Chiến Tranh</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=vien-tuong" class="nav-item">Viễn Tưởng</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=kinh-di" class="nav-item">Kinh Dị</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=tai-lieu" class="nav-item">Tài Liệu</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=bi-an" class="nav-item">Bí Ẩn</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=phim-18" class="nav-item">Phim 18+</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=tinh-cam" class="nav-item">Tình Cảm</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=tam-ly" class="nav-item">Tâm Lý</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=the-thao" class="nav-item">Thể Thao</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=phieu-luu" class="nav-item">Phiêu Lưu</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=am-nhac" class="nav-item">Âm Nhạc</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=gia-dinh" class="nav-item">Gia Đình</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=hoc-duong" class="nav-item">Học Đường</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=hai-huoc" class="nav-item">Hài Hước</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=hinh-su" class="nav-item">Hình Sự</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=vo-thuat" class="nav-item">Võ Thuật</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=khoa-hoc" class="nav-item">Khoa Học</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=than-thoai" class="nav-item">Thần Thoại</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=chinh-kich" class="nav-item">Chính Kịch</a></li>
+          <li><a href="/do-an-xem-phim/chi-tiet.php?describe=the-loai&type=kinh-dien" class="nav-item">Kinh Điển</a></li>
         </ul>
 
       </li>
-
       <li class="dropdown">
         <span class="title">Quốc gia</span>
         <ul class="sub-menu">
-          <li><a class="nav-item" href="/viet-nam">Việt Nam</a></li>
-          <li><a class="nav-item" href="/trung-quoc">Trung Quốc</a></li>
-          <li><a class="nav-item" href="/thai-lan">Thái Lan</a></li>
-          <li><a class="nav-item" href="/hong-kong">Hồng Kông</a></li>
-          <li><a class="nav-item" href="/phap">Pháp</a></li>
-          <li><a class="nav-item" href="/duc">Đức</a></li>
-          <li><a class="nav-item" href="/ha-lan">Hà Lan</a></li>
-          <li><a class="nav-item" href="/mexico">Mexico</a></li>
-          <li><a class="nav-item" href="/thuy-dien">Thụy Điển</a></li>
-          <li><a class="nav-item" href="/philippines">Philippines</a></li>
-          <li><a class="nav-item" href="/dan-mach">Đan Mạch</a></li>
-          <li><a class="nav-item" href="/thuy-si">Thụy Sĩ</a></li>
-          <li><a class="nav-item" href="/ukraina">Ukraina</a></li>
-          <li><a class="nav-item" href="/han-quoc">Hàn Quốc</a></li>
-          <li><a class="nav-item" href="/au-my">Âu Mỹ</a></li>
-          <li><a class="nav-item" href="/an-do">Ấn Độ</a></li>
-          <li><a class="nav-item" href="/canada">Canada</a></li>
-          <li><a class="nav-item" href="/tay-ban-nha">Tây Ban Nha</a></li>
-          <li><a class="nav-item" href="/indonesia">Indonesia</a></li>
-          <li><a class="nav-item" href="/ba-lan">Ba Lan</a></li>
-          <li><a class="nav-item" href="/malaysia">Malaysia</a></li>
-          <li><a class="nav-item" href="/bo-dao-nha">Bồ Đào Nha</a></li>
-          <li><a class="nav-item" href="/uae">UAE</a></li>
-          <li><a class="nav-item" href="/chau-phi">Châu Phi</a></li>
-          <li><a class="nav-item" href="/a-rap-xe-ut">Ả Rập Xê Út</a></li>
-          <li><a class="nav-item" href="/nhat-ban">Nhật Bản</a></li>
-          <li><a class="nav-item" href="/dai-loan">Đài Loan</a></li>
-          <li><a class="nav-item" href="/anh">Anh</a></li>
-          <li><a class="nav-item" href="/quoc-gia-khac">Quốc Gia Khác</a></li>
-          <li><a class="nav-item" href="/tho-nhi-ky">Thổ Nhĩ Kỳ</a></li>
-          <li><a class="nav-item" href="/nga">Nga</a></li>
-          <li><a class="nav-item" href="/uc">Úc</a></li>
-          <li><a class="nav-item" href="/brazil">Brazil</a></li>
-          <li><a class="nav-item" href="/y">Ý</a></li>
-          <li><a class="nav-item" href="/na-uy">Na Uy</a></li>
-          <li><a class="nav-item" href="/namh">Namh</a></li>
-          <li><a class="nav-item" href="/kinh-dien">Kinh Điển</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=viet-nam">Việt Nam</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=trung-quoc">Trung Quốc</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=thai-lan">Thái Lan</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=hong-kong">Hồng Kông</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=phap">Pháp</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=duc">Đức</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=ha-lan">Hà Lan</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=mexico">Mexico</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=thuy-dien">Thụy Điển</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=philippines">Philippines</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=dan-mach">Đan Mạch</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=thuy-si">Thụy Sĩ</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=ukraina">Ukraina</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=han-quoc">Hàn Quốc</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=au-my">Âu Mỹ</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=an-do">Ấn Độ</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=canada">Canada</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=tay-ban-nha">Tây Ban Nha</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=indonesia">Indonesia</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=ba-lan">Ba Lan</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=malaysia">Malaysia</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=bo-dao-nha">Bồ Đào Nha</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=uae">UAE</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=chau-phi">Châu Phi</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=a-rap-xe-ut">Ả Rập Xê Út</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=nhat-ban">Nhật Bản</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=dai-loan">Đài Loan</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=anh">Anh</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=quoc-gia-khac">Quốc Gia Khác</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=tho-nhi-ky">Thổ Nhĩ Kỳ</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=nga">Nga</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=uc">Úc</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=brazil">Brazil</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=y">Ý</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=na-uy">Na Uy</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=namh">Namh</a></li>
+          <li><a class="nav-item" href="/do-an-xem-phim/chi-tiet.php?describe=quoc-gia&type=kinh-dien">Kinh Điển</a></li>
         </ul>
       </li>
+
 
     </ul>
   </div>
@@ -112,20 +112,22 @@
   </div>
   <div class="nav-right d-flex align-items-center">
     <?php if (isset($_SESSION['user_id'])): ?>
-        <div class="user-menu dropdown">
-            <a href="profile.php" class="btn btn-light d-flex align-items-center dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-user me-2"></i> 
-                <?php echo htmlspecialchars($_SESSION['username']); ?>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="profile.php"><i class="fa fa-user-circle me-2"></i> Thông tin cá nhân</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-sign-out-alt me-2"></i> Đăng xuất</a></li>
-            </ul>
-        </div>
+      <div class="user-menu dropdown">
+        <a href="profile.php" class="btn btn-light d-flex align-items-center dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-user me-2"></i>
+          <?php echo htmlspecialchars($_SESSION['username']); ?>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" href="profile.php"><i class="fa fa-user-circle me-2"></i> Thông tin cá nhân</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-sign-out-alt me-2"></i> Đăng xuất</a></li>
+        </ul>
+      </div>
     <?php else: ?>
-        <a href="login.php" class="btn btn-outline-primary me-2"><i class="fa fa-sign-in-alt me-1"></i> Đăng nhập</a>
-        <a href="register.php" class="btn btn-primary"><i class="fa fa-user-plus me-1"></i> Đăng ký</a>
+      <a href="login.php" class="btn btn-outline-primary me-2"><i class="fa fa-sign-in-alt me-1"></i> Đăng nhập</a>
+      <a href="register.php" class="btn btn-primary"><i class="fa fa-user-plus me-1"></i> Đăng ký</a>
     <?php endif; ?>
-</div>
+  </div>
 </nav>
