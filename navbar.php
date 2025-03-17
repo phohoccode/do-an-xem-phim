@@ -130,22 +130,6 @@
     <?php else: ?>
       <a href="login.php" class="btn btn-warning"><i class="fa fa-sign-in-alt me-2"></i>Đăng nhập</a>
       <a href="register.php" class="btn btn-warning"><i class="fa fa-user-plus me-1"></i> Đăng ký</a>
-      <div class="user-menu dropdown">
-        <a href="profile.php" class="btn btn-light d-flex align-items-center dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa fa-user me-2"></i>
-          <?php echo htmlspecialchars($_SESSION['username']); ?>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <li><a class="dropdown-item" href="profile.php"><i class="fa fa-user-circle me-2"></i> Thông tin cá nhân</a></li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li><a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-sign-out-alt me-2"></i> Đăng xuất</a></li>
-        l>
-      </div>
-    <?php else: ?>
-      <a href="login.php" class="btn btn-outline-primary me-2"><i class="fa fa-sign-in-alt me-1"></i> Đăng nhập</a>
-      <a href="register.php" class="btn btn-primary"><i class="fa fa-user-plus me-1"></i> Đăng ký</a>
     <?php endif; ?>
   </div>
 </nav>
