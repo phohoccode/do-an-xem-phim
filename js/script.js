@@ -1,3 +1,4 @@
+
 function togglePassword() {
     var passwordField = document.getElementById('password');
     var eyeIcon = document.getElementById('eye-icon');

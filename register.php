@@ -114,37 +114,43 @@ $conn->close();
     <script src="js/script.js"></script>
 </head>
 <body>
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card p-4 shadow-lg" style="width: 400px;">
-        <h2 class="text-center mb-3 text-warning">Đăng ký</h2>
-        <p class="text-center text-warning">Đăng ký tài khoản để bình luận, đánh giá và lưu những bộ phim yêu thích của bạn.</p>
+<div class="center">
+    <div class="container">
+        <div class="text">Đăng ký</div>
+        <p class="">Đăng ký tài khoản để bình luận, đánh giá và lưu những bộ phim yêu thích của bạn.</p>
         <form method="POST" action="">
-            <div class="mb-3">
-                <label for="username" class="form-label">Tên đăng nhập</label>
-                <input type="text" class="form-control" name="username" required placeholder="Nhập tên đăng nhập"
-                       value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
+            <div class="data">
+                <label>Tên đăng nhập</label>
+                <input type="text" name="username" required placeholder="Nhập tên đăng nhập"
+                value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" required placeholder="Nhập email"
-                       value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>">
+            <div class="data">
+                <label>Email</label>
+                <input type="email" name="email" required placeholder="Nhập email"
+                value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>">
             </div>
-            <div class="mb-3 position-relative">
-                <label for="password" class="form-label">Mật khẩu</label>
-                <div class="input-group">
-                    <input type="password" class="form-control" name="password" id="password" required placeholder="Nhập mật khẩu" value="<?= isset($_SESSION['password']) ? htmlspecialchars($_SESSION['password']) : '' ?>">
-                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
-                        <i id="eye-icon" class="fa fa-eye-slash"></i>
-                    </button>
+            <div class="data">
+                <label>Mật khẩu</label>
+                <div class="password-container">
+                    <input type="password" name="password" id="password" required placeholder="Nhập mật khẩu" 
+                    value="<?= isset($_SESSION['password']) ? htmlspecialchars($_SESSION['password']) : '' ?>">
+                        <i class="fa-solid fa-eye toggle-password" id="eye-icon" onclick="togglePassword()"></i>
                 </div>
             </div>
-            <div class="mb-3 d-flex">
-                <input type="text" class="form-control me-2" id="verification" name="verification" placeholder="Mã xác thực">
-                <button type="submit" class="btn btn-verification-grey" name="send_code">Gửi mã</button>
+            <div class="data">
+                <label for="verification">Mã xác thực</label>
+                <div class="verification-container">
+                    <input type="text" name="verification" placeholder="Nhập mã xác thực" required>
+                    <button type="submit" name="send_code">Gửi mã</button>
+                </div>
             </div>
-            <button class="btn btn-custom-yellow w-100" type="submit" name="register">Đăng ký</button>
+            <div class="btn">
+                <button type="submit" name="register">Đăng ký</button>
+            </div>
+            <div class="signup-link">
+                Đã có tài khoản? <a href="login.php">Đăng nhập</a>
+            </div>
         </form>
-        <p class="text-center mt-3 text-white">Đã có tài khoản? <a href="login.php" class="text-warning">Đăng nhập</a></p>
     </div>
 </div>
 </body>

@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($username) || empty($password)) {
         echo "<script>alert('Vui lòng nhập đầy đủ thông tin!');</script>";
     } else {
+        // Truy vấn để kiểm tra tên đăng nhập
         $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -18,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_result($id, $hashed_password);
             $stmt->fetch();
             
+            // Kiểm tra mật khẩu
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['user_id'] = $id;
                 $_SESSION['username'] = $username;
@@ -34,41 +36,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
-    <link rel="stylesheet" href="css/login.css?v=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="js/script.js"></script>
 </head>
 <body>
-    <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-        <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
-            <h3 class="text-center mb-4 text-warning">Đăng nhập</h3>
-            <form method="POST" action="">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Tên đăng nhập</label>
-                    <input type="text" name="username" id="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
+    <div class="center">
+        <div class="container">
+            <div class="text">Đăng nhập</div>
+            <form action="" method="POST">
+                <div class="data">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" name="username" required placeholder="Nhập tên đăng nhập">
                 </div>
-                <div class="mb-3 position-relative">
-                    <label for="password" class="form-label">Mật khẩu</label>
-                    <div class="input-group">
-                        <input type="password" name="password" id="password" class="form-control" required placeholder="Nhập mật khẩu">
-                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
-                            <i id="eye-icon" class="fa fa-eye-slash"></i>
-                        </button>
+                <div class="data">
+                    <label>Mật khẩu</label>
+                    <div class="password-container">
+                        <input type="password" name="password" id="password" required placeholder="Nhập mật khẩu">
+                        <i class="fa-solid fa-eye toggle-password" id="eye-icon" onclick="togglePassword()"></i>
                     </div>
                 </div>
-                <button class="btn btn-custom-yellow w-100" type="submit">Đăng nhập</button>
+                <div class="forgot-pass">
+                    <a href="forgot-pass.php">Quên mật khẩu?</a>
+                </div>
+                <div class="btn">
+                    <button type="submit">Login</button>
+                </div>
+                <div class="signup-link">
+                    Chưa có tài khoản? <a href="register.php">Đăng ký ngay!</a>
+                </div>
             </form>
-            <div class="text-center mt-3">
-                <a href="forgot-pass.php" class="text-decoration-none text-warning">Quên mật khẩu?</a>
-            </div>
-            <p class="text-center mt-3 text-white">Chưa có tài khoản? <a href="register.php" class="text-warning">Đăng ký</a></p>
         </div>
     </div>
 </body>
