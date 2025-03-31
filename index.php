@@ -79,7 +79,20 @@ foreach ($categories as $type => $className) {
         <div class="row mt-5">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h3><?= htmlspecialchars($data['data']['breadCrumb'][0]['name'] ?? 'Danh mục') ?></h3>
-            <a href="#" class="d-flex align-items-center btn btn-primary btn-sm">Xem thêm
+
+            <?php
+              if (!empty($data['data']['seoOnPage']['og_url'])) {
+                $ogUrlParts = explode("/", $data['data']['seoOnPage']['og_url']); // Tách chuỗi theo dấu "/"
+                $describe = $ogUrlParts[0] ?? "danh-sach"; // Lấy phần "danh-sach"
+                $type = $ogUrlParts[1] ?? "phim-bo"; // Lấy phần loại phim
+
+                $href = "/do-an-xem-phim/chi-tiet.php?describe=" . urlencode($describe) . "&type=" . urlencode($type);
+              } else {
+                $href = "/do-an-xem-phim/chi-tiet.php";
+              }
+            ?>
+
+            <a href="<?= $href ?>" class="d-flex align-items-center btn btn-primary btn-sm">Xem thêm
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
               </svg>
@@ -115,6 +128,8 @@ foreach ($categories as $type => $className) {
       </section>
     <?php endforeach; ?>
   </div>
+
+  <?php include 'footer.php'; ?>
 </body>
 
 </html>

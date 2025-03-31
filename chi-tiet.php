@@ -18,7 +18,6 @@
   $data = $response['data'];
   $totalPages = $data["params"]["pagination"]["totalPages"];;
 
-
   echo "<script>console.log(" . json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . ");</script>";
   echo "<script>console.log(" . json_encode($totalPages, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . ");</script>";
 
@@ -33,7 +32,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="css/index.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </head>
@@ -45,7 +45,7 @@
     <div class="container">
 
       <div class="p-3 rounded-4 d-flex justify-content-between align-items-center my-5" style="background-color: #F0F4F8;">
-        <h3 class="fs-2"><?= htmlspecialchars($data["titlePage"]) ?></h3>
+        <h3 class="fs-5"><?= htmlspecialchars($data["titlePage"]) ?></h3>
       </div>
 
       <div class="row">
@@ -136,6 +136,9 @@
 
 
     </div>
+
+    <?php include 'footer.php'; ?>
+
   </body>
 
   </html>

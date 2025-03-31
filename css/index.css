@@ -1,3 +1,7 @@
+body {
+  min-height: 100vh;
+}
+
 img {
   display: block;
   height: 100%;
@@ -346,6 +350,7 @@ nav .nav-links .nav-item:hover {
   gap: 12px;
   background-color: #22223b;
   min-height: 100vh;
+  padding-bottom: 64px;
 }
 
 .episode-box {
