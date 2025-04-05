@@ -13,3 +13,9 @@ function togglePassword() {
         eyeIcon.classList.add('fa-eye-slash');  // Thay đổi icon thành mắt kín
     }
 }
+setTimeout(function() {
+    window.location.href = '<?= $redirect ?>';
+}, 1500);
+function closePopup() {
+    document.getElementById('popup').classList.remove('show');
+}

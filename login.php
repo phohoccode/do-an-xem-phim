@@ -7,9 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
 
     if (empty($username) || empty($password)) {
-        echo "<script>alert('Vui lòng nhập đầy đủ thông tin!');</script>";
+        $message = 'Vui lòng nhập đầy đủ thông tin!';
     } else {
-        // Truy vấn để kiểm tra tên đăng nhập
         $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -18,24 +17,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($id, $hashed_password);
             $stmt->fetch();
-            
-            // Kiểm tra mật khẩu
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['user_id'] = $id;
                 $_SESSION['username'] = $username;
-                echo "<script>alert('Đăng nhập thành công!'); window.location='index.php';</script>";
+                $message = 'Đăng nhập thành công!';
+                $redirect = 'index.php';
             } else {
-                echo "<script>alert('Tên đăng nhập hoặc mật khẩu không đúng!');</script>";
+                $message = 'Tên đăng nhập hoặc mật khẩu không đúng!';
             }
         } else {
-            echo "<script>alert('Tên đăng nhập hoặc mật khẩu không đúng!');</script>";
+            $message = 'Tên đăng nhập hoặc mật khẩu không đúng!';
         }
         $stmt->close();
     }
 }
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -50,16 +47,21 @@ $conn->close();
 <body>
     <div class="center">
         <div class="container">
-            <div class="text">Đăng nhập</div>
+            <div class="text">
+                <button type="button" onclick="window.location.href='index.php'" class="back-btn">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+                Đăng nhập
+            </div>
             <form action="" method="POST">
                 <div class="data">
                     <label>Tên đăng nhập</label>
-                    <input type="text" name="username" required placeholder="Nhập tên đăng nhập">
+                    <input type="text" name="username" placeholder="Nhập tên đăng nhập">
                 </div>
                 <div class="data">
                     <label>Mật khẩu</label>
                     <div class="password-container">
-                        <input type="password" name="password" id="password" required placeholder="Nhập mật khẩu">
+                        <input type="password" name="password" id="password" placeholder="Nhập mật khẩu">
                         <i class="fa-solid fa-eye toggle-password" id="eye-icon" onclick="togglePassword()"></i>
                     </div>
                 </div>
@@ -67,7 +69,7 @@ $conn->close();
                     <a href="forgot-pass.php">Quên mật khẩu?</a>
                 </div>
                 <div class="btn">
-                    <button type="submit">Login</button>
+                    <button type="submit">Đăng nhập</button>
                 </div>
                 <div class="signup-link">
                     Chưa có tài khoản? <a href="register.php">Đăng ký ngay!</a>
@@ -75,5 +77,23 @@ $conn->close();
             </form>
         </div>
     </div>
+    <?php if (!empty($message)): ?>
+    <div class="popup show" id="popup">
+        <p><?= $message ?></p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+    <?php if (isset($redirect)): ?>
+    <script>
+        setTimeout(function() {
+            window.location.href = '<?= $redirect ?>';
+        }, 1500);
+    </script>
+    <?php endif; ?>
+    <?php endif; ?>
+    <script>
+        function closePopup() {
+    document.getElementById('popup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>

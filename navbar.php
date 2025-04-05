@@ -121,7 +121,15 @@
           <?php echo htmlspecialchars($_SESSION['username']); ?>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <li><a class="dropdown-item" href="profile.php"><i class="fa fa-user-circle me-2"></i> Trang cá nhân</a></li>
+          <li><a class="dropdown-item" href="profile.php"><i class="fa-solid fa-user-circle me-2"></i>Trang cá nhân</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="savedmovies.php"><i class="fa-solid fa-bookmark me-3"></i>Phim đã lưu</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="viewhistory.php"><i class="fa-solid fa-history me-3"></i>Lịch sử xem</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>

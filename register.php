@@ -2,20 +2,22 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
 session_start();
 
+require 'vendor/autoload.php';
 include 'connect.php';
 
-// Gửi mã xác thực qua email
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["send_code"])) {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Địa chỉ email không hợp lệ. Vui lòng kiểm tra lại!');</script>";
-    } elseif (strlen($password) < 6) {
-        echo "<script>alert('Mật khẩu phải có ít nhất 6 ký tự!');</script>";
+        $message = 'Địa chỉ email không hợp lệ. Vui lòng kiểm tra lại!';
+    }
+    elseif (($domain = explode("@", $email)) && !checkdnsrr(array_pop($domain), "MX")) {
+            $message = 'Địa chỉ email không tồn tại';
+    }
+    elseif (!preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/', $password)) {
+        $message = 'Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất 1 chữ in hoa, 1 ký tự đặc biệt và 1 chữ số!';
     } else {
         $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
@@ -23,13 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["send_code"])) {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            echo "<script>alert('Email này đã được đăng ký trước đó. Vui lòng sử dụng email khác!');</script>";
+            $message = 'Email này đã được đăng ký trước đó. Vui lòng sử dụng email khác!';
         } else {
             if (!empty($email) && !empty($password)) {
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 $_SESSION['verification_code'] = rand(100000, 999999);
-                
+
                 $mail = new PHPMailer(true);
                 try {
                     $mail->isSMTP();
@@ -46,59 +48,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["send_code"])) {
                     $mail->Body = "Mã xác thực của bạn là: " . $_SESSION['verification_code'];
 
                     $mail->send();
-                    echo "<script>alert('Mã xác thực đã được gửi đến email của bạn!');</script>";
+                    $message = 'Mã xác thực đã được gửi đến email của bạn!';
                 } catch (Exception $e) {
-                    echo "<script>alert('Lỗi khi gửi email: " . $mail->ErrorInfo . "');</script>";
+                    $message = 'Lỗi khi gửi email: ' . $mail->ErrorInfo;
                 }
             } else {
-                echo "<script>alert('Vui lòng nhập đầy đủ email và mật khẩu!');</script>";
+                $message = 'Vui lòng nhập đầy đủ email và mật khẩu!';
             }
         }
         $stmt->close();
     }
 }
 
-// Xử lý đăng ký
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
     $username = trim($_POST['username']);
     $verification_code = trim($_POST['verification']);
 
     if (empty($verification_code)) {
-        echo "<script>alert('Vui lòng nhập mã xác thực!');</script>";
+        $message = 'Vui lòng nhập mã xác thực!';
     } elseif ($verification_code != $_SESSION['verification_code']) {
-        echo "<script>alert('Không đúng mã xác thực!');</script>";
+        $message = 'Không đúng mã xác thực!';
     } else {
         $email = $_SESSION['email'];
         $password = $_SESSION['password'];
 
-        if (strlen($password) < 6) {
-            echo "<script>alert('Mật khẩu phải có ít nhất 6 ký tự!');</script>";
+        if (!preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/', $password)) {
+            $message = 'Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất 1 chữ in hoa, 1 ký tự đặc biệt và 1 chữ số!';
         } else {
             $password = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
+            $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $username, $email, $password);
 
-            if ($stmt->num_rows > 0) {
-                echo "<script>alert('Email này đã được đăng ký trước đó. Vui lòng sử dụng email khác!');</script>";
+            if ($stmt->execute()) {
+                $message = 'Đăng ký thành công!';
+                $redirect = 'login.php';
+                unset($_SESSION['verification_code'], $_SESSION['email'], $_SESSION['password']);
             } else {
-                $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-                $stmt->bind_param("sss", $username, $email, $password);
-
-                if ($stmt->execute()) {
-                    echo "<script>alert('Đăng ký thành công!'); window.location='login.php';</script>";
-                    unset($_SESSION['verification_code'], $_SESSION['email'], $_SESSION['password']);
-                } else {
-                    echo "<script>alert('Lỗi đăng ký. Vui lòng thử lại!');</script>";
-                }
+                $message = 'Lỗi đăng ký. Vui lòng thử lại!';
             }
             $stmt->close();
         }
     }
 }
-
 $conn->close();
 ?>
 
@@ -108,7 +100,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký</title>
-    <link rel="stylesheet" href="css/login.css?v=1">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="js/script.js"></script>
@@ -127,20 +119,19 @@ $conn->close();
             <div class="data">
                 <label>Email</label>
                 <input type="email" name="email" required placeholder="Nhập email"
-                value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>">
+                value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">
             </div>
             <div class="data">
                 <label>Mật khẩu</label>
                 <div class="password-container">
-                    <input type="password" name="password" id="password" required placeholder="Nhập mật khẩu" 
-                    value="<?= isset($_SESSION['password']) ? htmlspecialchars($_SESSION['password']) : '' ?>">
+                    <input type="password" name="password" id="password" required placeholder="Nhập mật khẩu">
                         <i class="fa-solid fa-eye toggle-password" id="eye-icon" onclick="togglePassword()"></i>
                 </div>
             </div>
             <div class="data">
                 <label for="verification">Mã xác thực</label>
                 <div class="verification-container">
-                    <input type="text" name="verification" placeholder="Nhập mã xác thực" required>
+                    <input type="text" name="verification" placeholder="Nhập mã xác thực">
                     <button type="submit" name="send_code">Gửi mã</button>
                 </div>
             </div>
@@ -153,5 +144,23 @@ $conn->close();
         </form>
     </div>
 </div>
+<?php if (!empty($message)): ?>
+<div class="popup show" id="popup">
+    <p><?= $message ?></p>
+    <button onclick="closePopup()">OK</button>
+</div>
+<?php if (isset($redirect)): ?>
+<script>
+    setTimeout(function() {
+        window.location.href = '<?= $redirect ?>';
+    }, 1500);
+</script>
+<?php endif; ?>
+<?php endif; ?>
+<script>
+    function closePopup() {
+    document.getElementById('popup').classList.remove('show');
+}
+</script>
 </body>
 </html>
