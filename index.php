@@ -40,7 +40,7 @@ foreach ($categories as $type => $className) {
   <script src="js/script.js"></script>
 </head>
 
-<body>
+<body class="bg-dark text-white">
   <?php include 'navbar.php'; ?>
 
   <!-- Slide Show -->

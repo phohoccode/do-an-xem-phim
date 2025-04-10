@@ -21,7 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $id;
                 $_SESSION['username'] = $username;
                 $message = 'Đăng nhập thành công!';
-                $redirect = 'index.php';
+                header("Location: index.php");
+                exit();
             } else {
                 $message = 'Tên đăng nhập hoặc mật khẩu không đúng!';
             }
@@ -82,13 +83,6 @@ $conn->close();
         <p><?= $message ?></p>
         <button onclick="closePopup()">OK</button>
     </div>
-    <?php if (isset($redirect)): ?>
-    <script>
-        setTimeout(function() {
-            window.location.href = '<?= $redirect ?>';
-        }, 1500);
-    </script>
-    <?php endif; ?>
     <?php endif; ?>
     <script>
         function closePopup() {

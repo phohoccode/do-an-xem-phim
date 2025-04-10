@@ -124,7 +124,8 @@ $conn->close();
             <div class="data">
                 <label>Mật khẩu</label>
                 <div class="password-container">
-                    <input type="password" name="password" id="password" required placeholder="Nhập mật khẩu">
+                    <input type="password" name="password" id="password" required placeholder="Nhập mật khẩu"
+                    value="<?= isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '' ?>">
                         <i class="fa-solid fa-eye toggle-password" id="eye-icon" onclick="togglePassword()"></i>
                 </div>
             </div>

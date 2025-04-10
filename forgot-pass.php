@@ -65,7 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["send_code"])) {
 elseif (isset($_POST['verification']) && isset($_POST['new_password'])) {
     $verification = trim($_POST['verification']);
     $new_password = trim($_POST['new_password']);
-    $email = $_SESSION['email'];
     
     // Kiểm tra mật khẩu mới
     if (!preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/', $new_password)) {

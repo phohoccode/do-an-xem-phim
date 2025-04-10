@@ -398,3 +398,16 @@ nav .nav-links .nav-item:hover {
   color: #22223b;
   background-color: #ffbe0b;
 }
+
+.avatar {
+  border: 3px solid #FFD700;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+.background-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+}

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Liên kết Font Awesome -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<nav>
+<nav class="bg-dark">
   <div class="nav-left">
     <a class="logo" href="index.php">VLUTE-FILM</a>
     <ul class="nav-links">
@@ -120,7 +120,7 @@
           <i class="fa fa-user me-2"></i>
           <?php echo htmlspecialchars($_SESSION['username']); ?>
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" data-bs-auto-close="outside">
           <li><a class="dropdown-item" href="profile.php"><i class="fa-solid fa-user-circle me-2"></i>Trang cá nhân</a></li>
           <li>
             <hr class="dropdown-divider">
