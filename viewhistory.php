@@ -10,16 +10,16 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_all'])) {
-  $deleteStmt = $conn->prepare("DELETE FROM user_movies WHERE user_id = ? AND type = 'favorite'");
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_history'])) {
+  $deleteStmt = $conn->prepare("DELETE FROM user_movies WHERE user_id = ? AND type = 'history'");
   $deleteStmt->bind_param("i", $userId);
   $deleteStmt->execute();
-  header("Location: savedmovies.php");
+  header("Location: viewhistory.php");
   exit;
 }
 
 // Truy vấn danh sách phim đã lưu
-$sql = "SELECT * FROM user_movies WHERE user_id = ? AND type = 'favorite' ORDER BY updated_at DESC";
+$sql = "SELECT * FROM user_movies WHERE user_id = ? AND type = 'history' ORDER BY updated_at DESC";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $userId);
 $stmt->execute();
@@ -30,24 +30,24 @@ $movies = $result->fetch_all(MYSQLI_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Phim đã lưu - VLUTE-FILM</title>
-  <link rel="stylesheet" href="css/index.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử phim đã xem</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="bg-dark">
-  <?php include "navbar.php"; ?>
-  <div class="container">
-    <div class="p-3 rounded-4 d-flex justify-content-between align-items-center my-5" style="background-color: #F0F4F8;">
-      <h3><i class="fa-solid fa-bookmark me-3"></i>Danh sách phim đã lưu</h3>
-      <form method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tất cả phim đã lưu?');">
-          <button type="submit" name="delete_all" class="btn btn-danger">Xóa tất cả</button>
-      </form>
-    </div>
+    <?php include 'navbar.php'; ?>
+    <div class="container">
+        <div class="p-3 rounded-4 d-flex justify-content-between align-items-center my-5" style="background-color: #F0F4F8;">
+            <h3><i class="fa-solid fa-history me-3"></i>Lịch sử xem gần đây</h3>
+        <form method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tất cả phim đã xem?');">
+          <button type="submit" name="delete_history" class="btn btn-danger">Xóa lịch sử</button>
+        </form>
+        </div>
 
-    <div class="row">
+        <div class="row">
       <?php if (!empty($movies)): ?>
         <?php foreach ($movies as $movie): ?>
           <div class="col-6 col-sm-6 col-md-3 col-lg-2">
@@ -58,20 +58,20 @@ $movies = $result->fetch_all(MYSQLI_ASSOC);
               <div class="card-movie-body">
                 <p class="text-truncate card-movie-title"><?= htmlspecialchars($movie['movie_name']) ?></p>
                 <div class="d-flex gap-1">
-                  <a href="/do-an-xem-phim/dang-xem.php?name=<?= urlencode($movie['movie_name']) ?>&slug=<?= urlencode($movie['movie_slug']) ?>" 
-                  class="btn btn-primary btn-sm w-100">
+                  <a href="/do-an-xem-phim/dang-xem.php?name=<?= urlencode($movie['movie_name']) ?>&slug=<?= urlencode($movie['movie_slug']) ?>" class="btn btn-primary btn-sm w-100">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
                       <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z"/>
                     </svg>
                     Xem ngay
                   </a>
-                  <form method="POST" action="delete_movie.php" onsubmit="return confirm('Bạn có chắc muốn hủy lưu phim này?');" class="w-auto">
+                <form method="POST" action="delete_movie.php" onsubmit="return confirm('Xóa phim khỏi lịch sử xem?');" class="w-auto">
                     <input type="hidden" name="slug" value="<?= htmlspecialchars($movie['movie_slug']) ?>">
-                    <input type="hidden" name="type" value="favorite">
+                    <input type="hidden" name="type" value="history">
                     <button type="submit" class="btn btn-outline-danger btn-sm">
-                      <i class="fa-solid fa-trash"></i>
+                        <i class="fa-solid fa-trash"></i>
                     </button>
-                  </form>
+                </form>
+
                 </div>
               </div>
               <!-- Nếu bạn có trường lang hoặc time thì hiển thị -->
@@ -89,9 +89,9 @@ $movies = $result->fetch_all(MYSQLI_ASSOC);
           </div>
         <?php endforeach; ?>
       <?php else: ?>
-        <p class="text-white text-center">Bạn chưa lưu bộ phim nào!</p>
+        <p class="text-white text-center">Bạn chưa xem bộ phim nào!</p>
       <?php endif; ?>
     </div>
-  </div>
+    </div>
 </body>
 </html>

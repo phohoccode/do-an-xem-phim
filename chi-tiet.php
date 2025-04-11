@@ -1,4 +1,4 @@
-  <?php
+<?php
 
   // session_start();
   include 'connect.php';
@@ -34,15 +34,15 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/index.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
   </head>
 
   <body>
     <?php include 'navbar.php'; ?>
 
 
-    <div class="container">
+    <div class="max-w-[1440px] mx-auto px-4 mt-5">
 
       <div class="p-3 rounded-4 d-flex justify-content-between align-items-center my-5" style="background-color: #F0F4F8;">
         <h3 class="fs-5"><?= htmlspecialchars($data["titlePage"]) ?></h3>
@@ -50,28 +50,20 @@
 
       <div class="row">
         <?php if (!empty($data['items'])): ?>
-          <?php foreach ($data['items'] as $movie): ?>
-            <div class="col-6 col-sm-6 col-md-3 col-lg-2">
-              <div class="mb-4 card-movie">
-                <a href="/do-an-xem-phim/thong-tin.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>">
-                  <img src="<?= htmlspecialchars("https://phimimg.com/" . $movie['poster_url']) ?>" alt="<?= htmlspecialchars($movie['name']) ?>">
+           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              <?php foreach ($data['items'] as $movie): ?>
+                <a
+                  class="flex flex-col gap-2 group"
+                  href="/do-an-xem-phim/thong-tin.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>">
+                  <div class="h-0 relative pb-[150%] rounded-xl overflow-hidden css-0 group flex items-center justify-center">
+                    <img class="border border-gray-800 h-full rounded-xl w-full absolute group-hover:brightness-75 inset-0 transition-all group-hover:scale-105" src="<?= htmlspecialchars("https://phimimg.com/" . $movie['poster_url']) ?>"
+                      alt="<?= htmlspecialchars($movie['name']) ?>">
+                  </div>
+                  <span class="text-gray-50 text-xs group-hover:text-[#ffd875] lg:text-sm transition-all" style="-webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;">Cha Tôi, Người Ở Lại</span>
                 </a>
-                <div class="card-movie-body">
-                  <p class="text-truncate card-movie-title"><?= htmlspecialchars($movie['name']) ?></p>
-                  <a href="/do-an-xem-phim/dang-xem.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>" style="width: 100%;" class="btn btn-primary btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" style="margin-bottom: 2px;" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
-                      <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z" />
-                    </svg>
-                    Xem ngay
-                  </a>
-                </div>
-                <div class="card-movie-status">
-                  <span class="badge rounded-pill bg-primary"><?= htmlspecialchars($movie['lang']) ?></span>
-                  <span class="badge rounded-pill bg-secondary"><?= htmlspecialchars($movie['time']) ?></span>
-                </div>
-              </div>
+              <?php endforeach; ?>
             </div>
-          <?php endforeach; ?>
+          </div>
         <?php else: ?>
           <p class="text-muted">Không có phim nào.</p>
         <?php endif; ?>
