@@ -51,27 +51,45 @@ foreach ($categories as $type => $className) {
           <?php foreach ($newMovies['items'] as $movie): ?>
             <div class="swiper-slide">
               <div class="text-gray-50">
-                <img class="brightness-[0.85] absolute inset-0" src="<?= htmlspecialchars($movie['thumb_url']) ?>"
-                  alt="<?= htmlspecialchars($movie['name']) ?>">
+                <img class="brightness-[0.85] absolute inset-0" src="<?= $movie['thumb_url'] ?>"
+                  alt="<?= $movie['name'] ?>">
                 <div class="absolute w-[50%] px-4 bottom-12 left-8">
-                  <h2 class="lg:text-3xl md:text-2xl text-xl"><?= htmlspecialchars($movie['name']) ?></h2>
-                  <p class="my-2"><?= htmlspecialchars($movie['origin_name']) ?></p>
+                  <h2 class="lg:text-3xl md:text-2xl text-xl"><?= $movie['name'] ?></h2>
+                  <p class="my-2"><?= $movie['origin_name'] ?></p>
                   <div class="flex gap-2 items-center flex-wrap mt-2">
                     <?php foreach ($movie['category'] as $category): ?>
-                      <a href="/danh-muc/<?php echo htmlspecialchars($category['slug']); ?>"
+                      <a href="/danh-muc/<?php echo $category['slug'] ?>"
                         class="bg-gray-100 text-gray-800 text-xs font-medium me-1 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300">
-                        <?php echo htmlspecialchars($category['name']); ?>
+                        <?php echo $category['name'] ?>
                       </a>
                     <?php endforeach; ?>
                   </div>
 
                   <div class="flex gap-2 items-center mt-6">
-                    <a href=""> <button
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Xem
-                        ngay</button></a>
-                    <a href="/do-an-xem-phim/thong-tin.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>"> <button
-                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Thông
-                        tin</button></a>
+                    <a href="/do-an-xem-phim/watching.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
+                      <button
+                        class="text-white flex items-center gap-1 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
+                        <svg class="w-[24px] h-[24px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                          height="24" fill="currentColor" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                            clip-rule="evenodd" />
+                        </svg>
+                        Xem ngay
+                      </button>
+                    </a>
+                    <a href="/do-an-xem-phim/info.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
+                      <button
+                        class="text-gray-900 flex items-center gap-1 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 ">
+                        <svg class="w-[24px] h-[24px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                          height="24" fill="currentColor" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd"
+                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z"
+                            clip-rule="evenodd" />
+                        </svg>
+
+                        Thông tin
+                      </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -95,7 +113,7 @@ foreach ($categories as $type => $className) {
           <div class="flex flex-col gap-4">
             <div class="flex items-center justify-between mb-4">
               <h3 class="lg:text-2xl text-lg text-gray-50">
-                <?= htmlspecialchars($data['data']['breadCrumb'][0]['name'] ?? 'Danh mục') ?>
+                <?= $data['data']['breadCrumb'][0]['name'] ?? 'Danh mục' ?>
               </h3>
               <?php
               if (!empty($data['data']['seoOnPage']['og_url'])) {
@@ -109,7 +127,7 @@ foreach ($categories as $type => $className) {
               }
               ?>
 
-              <a href="<?= $href ?>" class="flex items-center gap-2 text-gray-50 hover:text-[#ffbe0b]">Xem thêm
+              <a href="<?= $href ?>" class="flex items-center gap-1 text-gray-50 hover:text-blue-600">Xem thêm
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
@@ -122,28 +140,27 @@ foreach ($categories as $type => $className) {
                 <?php foreach ($data['data']['items'] as $movie): ?>
                   <div class="relative group">
                     <div class="flex flex-col gap-2 group"
-                      href="/do-an-xem-phim/thong-tin.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>">
+                      href="/do-an-xem-phim/info.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
                       <div
                         class="h-0 relative pb-[150%] rounded-xl overflow-hidden css-0 group flex items-center justify-center">
-                        <a href="/do-an-xem-phim/thong-tin.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>">
+                        <a href="/do-an-xem-phim/info.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
                           <img
                             class="border border-gray-800 h-full rounded-xl w-full absolute group-hover:brightness-75 inset-0 transition-all group-hover:scale-105"
-                            src="<?= htmlspecialchars("https://phimimg.com/" . $movie['poster_url']) ?>"
-                            alt="<?= htmlspecialchars($movie['name']) ?>">
+                            src="<?= "https://phimimg.com/" . $movie['poster_url'] ?>" alt="<?= $movie['name'] ?>">
                         </a>
-                        <a href="/do-an-xem-phim/thong-tin.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>"
-                          class="text-white text-center absolute bottom-2 left-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Xem
+                        <a href="/do-an-xem-phim/watching.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>"
+                          class="text-white text-center absolute bottom-2 left-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">Xem
                           ngay</a>
                       </div>
                       <span class="text-gray-50 text-xs group-hover:text-[#ffd875] lg:text-sm transition-all"
-                        style="-webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;"><?= htmlspecialchars($movie['name']) ?></span>
+                        style="-webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;"><?= $movie['name'] ?></span>
                     </div>
 
                     <div class="absolute top-2 left-2 flex gap-2 items-center flex-wrap">
                       <span
-                        class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300"><?= htmlspecialchars($movie['quality']) ?></span>
+                        class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300"><?= $movie['quality'] ?></span>
                       <span
-                        class=" bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300"><?= htmlspecialchars($movie['lang']) ?></span>
+                        class=" bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300"><?= $movie['lang'] ?></span>
                     </div>
                   </div>
                 <?php endforeach; ?>

@@ -10,19 +10,15 @@ $limit = 24;
 $moviesData = [];
 
 // lấy search từ query string
-$search = $_GET['search'];
+$search = $_GET['q'];
 $page = $_GET['page'] ?? "1";
 
 $response = fetchData("$baseUrl?keyword=$search&limit=$limit&page=$page");
 $data = $response['data'];
 $items = $data['items'];
-$totalPages = $data["params"]["pagination"]["totalPages"];;
+$totalPages = $data["params"]["pagination"]["totalPages"];
+$totalItems = $data["params"]["pagination"]["totalItems"];
 $titlePage = $data['titlePage'];
-
-echo "<script>console.log(" . json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . ");</script>";
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -31,79 +27,87 @@ echo "<script>console.log(" . json_encode($response, JSON_PRETTY_PRINT | JSON_UN
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title><?= htmlspecialchars($titlePage) ?></title>
   <link rel="stylesheet" href="css/index.css">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
   <?php include 'navbar.php'; ?>
 
+  <div class="max-w-screen-2xl mx-auto mt-12 px-4 lg:px-14">
 
-  <div class="container">
-
-    <div class="p-3 rounded-4 d-flex justify-content-between align-items-center my-5" style="background-color: #F0F4F8;">
-      <h3 class="fs-5"><?= htmlspecialchars($data["titlePage"]) ?></h3>
+    <div class="lg:backdrop-blur-lg lg:bg-[#282b3a8a] p-4 rounded-lg flex justify-between items-center mb-12">
+      <h3 class="text-lg text-gray-50 font-semibold"><?= $titlePage ?> - <?= $totalItems ?> bộ phim </h3>
     </div>
 
-    <div class="row">
-      <?php if (!empty($data['items'])): ?>
-        <?php foreach ($data['items'] as $movie): ?>
-          <div class="col-6 col-sm-6 col-md-3 col-lg-2">
-            <div class="mb-4 card-movie">
-              <a href="/do-an-xem-phim/thong-tin.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>">
-                <img src="<?= htmlspecialchars("https://phimimg.com/" . $movie['poster_url']) ?>" alt="<?= htmlspecialchars($movie['name']) ?>">
-              </a>
-              <div class="card-movie-body">
-                <p class="text-truncate card-movie-title"><?= htmlspecialchars($movie['name']) ?></p>
-                <a href="/do-an-xem-phim/dang-xem.php?name=<?= htmlspecialchars($movie['name']) ?>&slug=<?= htmlspecialchars($movie['slug']) ?>" style="width: 100%;" class="btn btn-primary btn-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" style="margin-bottom: 2px;" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
-                    <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z" />
-                  </svg>
-                  Xem ngay
+    <?php if (!empty($items)): ?>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <?php foreach ($items as $movie): ?>
+          <div class="relative group">
+            <div class="flex flex-col gap-2 group">
+              <div class="h-0 relative pb-[150%] rounded-xl overflow-hidden css-0 group flex items-center justify-center">
+                <a href="/do-an-xem-phim/info.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
+                  <img
+                    class="border border-gray-800 h-full rounded-xl w-full absolute group-hover:brightness-75 inset-0 transition-all group-hover:scale-105"
+                    src="<?= "https://phimimg.com/" . $movie['poster_url'] ?>" alt="<?= $movie['name'] ?>">
                 </a>
+                <a href="/do-an-xem-phim/watching.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>"
+                  class="text-white text-center absolute bottom-2 left-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">Xem
+                  ngay</a>
               </div>
-              <div class="card-movie-status">
-                <span class="badge rounded-pill bg-primary"><?= htmlspecialchars($movie['lang']) ?></span>
-                <span class="badge rounded-pill bg-secondary"><?= htmlspecialchars($movie['time']) ?></span>
-              </div>
+              <span class="text-gray-50 text-xs group-hover:text-[#ffd875] lg:text-sm transition-all"
+                style="-webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;"><?= $movie['name'] ?></span>
+            </div>
+
+            <div class="absolute top-2 left-2 flex gap-2 items-center flex-wrap">
+              <span
+                class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300"><?= $movie['quality'] ?></span>
+              <span
+                class=" bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300"><?= $movie['lang'] ?></span>
             </div>
           </div>
         <?php endforeach; ?>
-      <?php else: ?>
-        <p class="text-muted">Không có phim nào.</p>
-      <?php endif; ?>
-    </div>
+      </div>
+
+      <!-- Pagination -->
+      <ul class="flex flex-wrap justify-center items-center gap-2 mt-12">
 
 
-    <ul class="pagination my-5 justify-content-center">
-      <!-- Nút Previous -->
-      <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-        <a class="page-link" href="?search=<?= urlencode($search) ?>&page=<?= max(1, $page - 1) ?>">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
+        <?php
+        $maxPagesToShow = 5;
+        $start = max(1, $page - floor($maxPagesToShow / 2));
+        $end = min($totalPages, $start + $maxPagesToShow - 1);
 
-      <?php for ($i = 1; $i <= min($totalPages, 5); $i++): ?>
-        <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-          <a class="page-link" href="?search=<?= urlencode($search) ?>&page=<?= $i ?>"><?= $i ?></a>
-        </li>
-      <?php endfor; ?>
+        if ($start > 1) {
+          echo '<li><a href="?q=' . urlencode($search) . '&page=1" class="px-3 py-1.5 rounded-md border border-gray-700 text-sm font-medium bg-gray-900 text-gray-300 hover:bg-gray-700">1</a></li>';
+          if ($start > 2) {
+            echo '<li><span class="px-3 py-1.5 text-gray-500">...</span></li>';
+          }
+        }
 
-      <!-- Nút Next -->
-      <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
-        <a class="page-link" href="?search=<?= urlencode($search) ?>&page=<?= min($totalPages, $page + 1) ?>">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
+        for ($i = $start; $i <= $end; $i++) {
+          echo '<li><a href="?q=' . urlencode($search) . '&page=' . $i . '" class="px-3 py-1.5 rounded-md border border-gray-700 text-sm font-medium transition ' . ($i == $page ? 'bg-blue-600 text-white' : 'bg-gray-900 text-gray-300 hover:bg-gray-700') . '">' . $i . '</a></li>';
+        }
 
+        if ($end < $totalPages) {
+          if ($end < $totalPages - 1) {
+            echo '<li><span class="px-3 py-1.5 text-gray-500">...</span></li>';
+          }
+          echo '<li><a href="?q=' . urlencode($search) . '&page=' . $totalPages . '" class="px-3 py-1.5 rounded-md border border-gray-700 text-sm font-medium bg-gray-900 text-gray-300 hover:bg-gray-700">' . $totalPages . '</a></li>';
+        }
+        ?>
+  
+      </ul>
 
-    <?php include 'footer.php'; ?>
+    <?php else: ?>
+      <div class="text-center py-24">
+        <p class="text-2xl font-semibold text-white">Không có phim nào.</p>
+      </div>
+    <?php endif; ?>
 
   </div>
+  <?php include 'footer.php'; ?>
 </body>
 
 </html>
