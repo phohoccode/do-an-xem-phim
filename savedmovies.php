@@ -35,7 +35,6 @@ $movies = $result->fetch_all(MYSQLI_ASSOC);
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Phim đã lưu - VLUTE-FILM</title>
   <link rel="stylesheet" href="css/index.css">
-
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
@@ -95,18 +94,18 @@ $movies = $result->fetch_all(MYSQLI_ASSOC);
                 </form>
               </div>
 
-              <?php if (!empty($movie['lang']) || !empty($movie['time'])): ?>
+              <?php if (!empty($movie['quality']) || !empty($movie['lang'])): ?>
                 <div class="absolute top-2 left-2 flex gap-2 items-center flex-wrap">
-                  <?php if (!empty($movie['lang'])): ?>
+                  <?php if (!empty($movie['quality'])): ?>
                     <span
-                      class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                      <?= htmlspecialchars($movie['lang']) ?>
+                      class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300">
+                      <?= htmlspecialchars($movie['quality']) ?>
                     </span>
                   <?php endif; ?>
-                  <?php if (!empty($movie['time'])): ?>
+                  <?php if (!empty($movie['lang'])): ?>
                     <span
-                      class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300">
-                      <?= htmlspecialchars($movie['time']) ?>
+                      class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                      <?= htmlspecialchars($movie['lang']) ?>
                     </span>
                   <?php endif; ?>
                 </div>

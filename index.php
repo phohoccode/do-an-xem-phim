@@ -66,17 +66,15 @@ foreach ($categories as $type => $className) {
                   </div>
 
                   <div class="flex gap-2 items-center mt-6">
-                    <a href="/do-an-xem-phim/watching.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
-                      <button
-                        class="text-white flex items-center gap-1 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
-                        <svg class="w-[24px] h-[24px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                          height="24" fill="currentColor" viewBox="0 0 24 24">
-                          <path fill-rule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
-                            clip-rule="evenodd" />
-                        </svg>
-                        Xem ngay
-                      </button>
-                    </a>
+                  <form method="POST" action="watch_movie.php">
+                      <input type="hidden" name="name" value="<?= $movie['name'] ?>">
+                      <input type="hidden" name="slug" value="<?= $movie['slug'] ?>">
+                      <input type="hidden" name="poster_url" value="<?= $movie['poster_url'] ?>">
+                    <button type="submit"
+                            class="text-white text-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-6 py-3 focus:outline-none">
+                      Xem ngay
+                    </button>
+                  </form>
                     <a href="/do-an-xem-phim/info.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
                       <button
                         class="text-gray-900 flex items-center gap-1 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 ">
@@ -148,9 +146,15 @@ foreach ($categories as $type => $className) {
                             class="border border-gray-800 h-full rounded-xl w-full absolute group-hover:brightness-75 inset-0 transition-all group-hover:scale-105"
                             src="<?= "https://phimimg.com/" . $movie['poster_url'] ?>" alt="<?= $movie['name'] ?>">
                         </a>
-                        <a href="/do-an-xem-phim/watching.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>"
-                          class="text-white text-center absolute bottom-2 left-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">Xem
-                          ngay</a>
+                        <form method="POST" action="watch_movie.php">
+                            <input type="hidden" name="name" value="<?= $movie['name'] ?>">
+                            <input type="hidden" name="slug" value="<?= $movie['slug'] ?>">
+                            <input type="hidden" name="poster_url" value="<?= $movie['poster_url'] ?>">
+                          <button type="submit"
+                            class="text-white text-center absolute bottom-2 left-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">
+                            Xem ngay
+                          </button>
+                        </form>
                       </div>
                       <span class="text-gray-50 text-xs group-hover:text-[#ffd875] lg:text-sm transition-all"
                         style="-webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;"><?= $movie['name'] ?></span>

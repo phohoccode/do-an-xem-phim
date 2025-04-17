@@ -65,7 +65,7 @@ $movies = $result->fetch_all(MYSQLI_ASSOC);
               <div class="flex flex-col gap-2 group">
                 <div class="h-0 relative pb-[150%] rounded-xl overflow-hidden flex items-center justify-center">
                   <a
-                    href="/do-an-xem-phim/thong-tin.php?name=<?= urlencode($movie['movie_name']) ?>&slug=<?= urlencode($movie['movie_slug']) ?>">
+                    href="/do-an-xem-phim/info.php?name=<?= urlencode($movie['movie_name']) ?>&slug=<?= urlencode($movie['movie_slug']) ?>">
                     <img
                       class="border border-gray-800 h-full rounded-xl w-full absolute group-hover:brightness-75 inset-0 transition-all group-hover:scale-105"
                       src="<?= htmlspecialchars($movie['movie_poster']) ?>"
@@ -97,18 +97,18 @@ $movies = $result->fetch_all(MYSQLI_ASSOC);
                 </form>
               </div>
 
-              <?php if (!empty($movie['lang']) || !empty($movie['time'])): ?>
+              <?php if (!empty($movie['quality']) || !empty($movie['lang'])): ?>
                 <div class="absolute top-2 left-2 flex gap-2 items-center flex-wrap">
-                  <?php if (!empty($movie['lang'])): ?>
+                  <?php if (!empty($movie['quality'])): ?>
                     <span
-                      class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                      <?= htmlspecialchars($movie['lang']) ?>
+                      class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300">
+                      <?= htmlspecialchars($movie['quality']) ?>
                     </span>
                   <?php endif; ?>
-                  <?php if (!empty($movie['time'])): ?>
+                  <?php if (!empty($movie['lang'])): ?>
                     <span
-                      class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300">
-                      <?= htmlspecialchars($movie['time']) ?>
+                      class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                      <?= htmlspecialchars($movie['lang']) ?>
                     </span>
                   <?php endif; ?>
                 </div>
