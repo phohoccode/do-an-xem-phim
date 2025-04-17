@@ -13,7 +13,8 @@ $moviesData = [];
 $search = $_GET['q'];
 $page = $_GET['page'] ?? "1";
 
-$response = fetchData("$baseUrl?keyword=$search&limit=$limit&page=$page");
+$response = fetchData("$baseUrl?keyword=" . urlencode($search) . "&limit=$limit&page=$page");
+
 $data = $response['data'];
 $items = $data['items'];
 $totalPages = $data["params"]["pagination"]["totalPages"];
