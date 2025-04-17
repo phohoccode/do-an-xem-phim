@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connect.php';
+include './connect.php';
 include "./utils/index.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -70,6 +70,98 @@ $trailerUrl = isset($movie['trailer_url']) ? convertToEmbedUrl($movie['trailer_u
 $posterUrl = $movie['poster_url'] ?? '';
 $thumbUrl = $movie['thumb_url'] ?? '';
 $episodes = $response['episodes'] ?? [];
+
+// random phim
+$categories = [
+  "hanh-dong",
+  "mien-tay",
+  "tre-em",
+  "lich-su",
+  "co-trang",
+  "chien-tranh",
+  "vien-tuong",
+  "kinh-di",
+  "tai-lieu",
+  "bi-an",
+  "tinh-cam",
+  "tam-ly",
+  "the-thao",
+  "phieu-luu",
+  "am-nhac",
+  "gia-dinh",
+  "hoc-duong",
+  "hai-huoc",
+  "hinh-su",
+  "vo-thuat",
+  "khoa-hoc",
+  "than-thoai",
+  "chinh-kich",
+  "kinh-dien"
+];
+
+$countries = [
+  "viet-nam",
+  "trung-quoc",
+  "thai-lan",
+  "hong-kong",
+  "phap",
+  "duc",
+  "ha-lan",
+  "mexico",
+  "thuy-dien",
+  "philippines",
+  "dan-mach",
+  "thuy-si",
+  "ukraina",
+  "han-quoc",
+  "au-my",
+  "an-do",
+  "canada",
+  "tay-ban-nha",
+  "indonesia",
+  "ba-lan",
+  "malaysia",
+  "bo-dao-nha",
+  "uae",
+  "chau-phi",
+  "a-rap-xe-ut",
+  "nhat-ban",
+  "dai-loan",
+  "anh",
+  "quoc-gia-khac",
+  "tho-nhi-ky",
+  "nga",
+  "uc",
+  "brazil",
+  "y",
+  "na-uy",
+  "namh",
+  "kinh-dien"
+];
+$describe = 'the-loai';
+$type = '';
+
+if (!empty($categories) && !empty($countries)) {
+  $isFromCountry = rand(0, 1); // 50/50 random quốc gia hoặc thể loại
+
+  if ($isFromCountry) {
+    $describe = 'quoc-gia';
+    $randomItem = $countries[array_rand($countries)];
+  } else {
+    $describe = 'the-loai';
+    $randomItem = $categories[array_rand($categories)];
+  }
+
+  $type = $randomItem;
+}
+
+$data = [];
+if ($describe && $type) {
+  $limit = 24;
+  $page = 1;
+  $randomMovies = fetchData("https://phimapi.com/v1/api/$describe/$type?limit=$limit&page=$page");
+  $data = $randomMovies['data'] ?? [];
+}
 
 // Kiểm tra xem phim đã được lưu chưa (để cập nhật data-saved)
 $isSaved = false;
@@ -230,6 +322,9 @@ if (isset($_SESSION['user_id'])) {
         </iframe>
       </div>
     </div>
+
+    <?php include 'movie-suggestion.php'; ?>
+
   </div>
   <?php include 'footer.php'; ?>
   <script>

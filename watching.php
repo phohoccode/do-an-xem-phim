@@ -56,12 +56,8 @@ $movie = $response['movie'];
 
   <div class="flex flex-col gap-4 text-gray-50 lg:px-14 max-w-[1560px] mt-12 mx-auto">
     <h1 class="text-2xl mb-6"><?= $currentEpisode['filename'] ?></h1>
-
-
     <iframe class="w-full h-[80vh] rounded-2xl" src="<?= $currentEpisode["link_embed"] ?>" frameBorder=" 0"
       allow="fullscreen"></iframe>
-
-
     <div class="mt-6 p-4 rounded-2xl lg:backdrop-blur-lg lg:bg-[#282b3a8a]">
       <h3 class="text-xl mb-4">Danh sách tập phim</h3>
       <div class="episode-list flex flex-wrap gap-2">
@@ -74,6 +70,9 @@ $movie = $response['movie'];
       </div>
 
     </div>
+
+    <?php include 'movie-suggestion.php'; ?>
+
   </div>
 
   <?php include 'footer.php'; ?>

@@ -119,9 +119,9 @@ foreach ($categories as $type => $className) {
                 $describe = $ogUrlParts[0] ?? "danh-sach"; // Lấy phần "danh-sach"
                 $type = $ogUrlParts[1] ?? "phim-bo"; // Lấy phần loại phim
             
-                $href = "/do-an-xem-phim/chi-tiet.php?describe=" . urlencode($describe) . "&type=" . urlencode($type);
+                $href = "/do-an-xem-phim/detail.php?describe=" . urlencode($describe) . "&type=" . urlencode($type);
               } else {
-                $href = "/do-an-xem-phim/chi-tiet.php";
+                $href = "/do-an-xem-phim/detail.php";
               }
               ?>
 
