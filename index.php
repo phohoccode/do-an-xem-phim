@@ -69,10 +69,19 @@ foreach ($categories as $type => $className) {
                   <form method="POST" action="watch_movie.php">
                       <input type="hidden" name="name" value="<?= $movie['name'] ?>">
                       <input type="hidden" name="slug" value="<?= $movie['slug'] ?>">
-                      <input type="hidden" name="poster_url" value="<?= $movie['poster_url'] ?>">
+                      <input type="hidden" name="poster" value="<?= $movie['poster_url'] ?>">
+                      <input type="hidden" name="thumbnail" value="<?= $movie['thumb_url'] ?>">
+                      <input type="hidden" name="quality" value="<?= $movie['quality'] ?>">
+                      <input type="hidden" name="lang" value="<?= $movie['lang'] ?>">
+                      <input type="hidden" name="episode" value="<?= htmlspecialchars($_GET['episode'] ?? '') ?>">
+                      <input type="hidden" name="episode_list" value='<?= json_encode($movie['movie_episodes'] ?? []) ?>'>
+                      <input type="hidden" name="type_movie" value="<?= $movie['type'] ?>">
                     <button type="submit"
                             class="text-white text-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-6 py-3 focus:outline-none">
-                      Xem ngay
+                            <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z" />
+                            </svg>
+                            Xem ngay
                     </button>
                   </form>
                     <a href="/do-an-xem-phim/info.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
@@ -147,11 +156,19 @@ foreach ($categories as $type => $className) {
                             src="<?= "https://phimimg.com/" . $movie['poster_url'] ?>" alt="<?= $movie['name'] ?>">
                         </a>
                         <form method="POST" action="watch_movie.php">
-                            <input type="hidden" name="name" value="<?= $movie['name'] ?>">
-                            <input type="hidden" name="slug" value="<?= $movie['slug'] ?>">
-                            <input type="hidden" name="poster_url" value="<?= $movie['poster_url'] ?>">
+                          <input type="hidden" name="name" value="<?= $movie['name'] ?>">
+                          <input type="hidden" name="slug" value="<?= $movie['slug'] ?>">
+                          <input type="hidden" name="poster" value="<?= "https://phimimg.com/" . $movie['poster_url'] ?>">
+                          <input type="hidden" name="thumbnail" value="<?= "https://phimimg.com/" . $movie['thumb_url'] ?>">
+                          <input type="hidden" name="quality" value="<?= $movie['quality'] ?>">
+                          <input type="hidden" name="lang" value="<?= $movie['lang'] ?>">
+                          <input type="hidden" name="episode" value="<?= htmlspecialchars($_GET['episode'] ?? '') ?>">
+                          <input type="hidden" name="type_movie" value="<?= $movie['type'] ?>">
                           <button type="submit"
                             class="text-white text-center absolute bottom-2 left-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z" />
+                            </svg>
                             Xem ngay
                           </button>
                         </form>
@@ -191,6 +208,10 @@ foreach ($categories as $type => $className) {
         },
         loop: true,
         slidesPerView: 1,
+        autoplay: {
+        delay: 4000, // thời gian giữa các slide (ms)
+        disableOnInteraction: false, // không dừng autoplay khi người dùng tương tác
+        },
         pagination: {
           el: '.swiper-pagination',
           clickable: true,

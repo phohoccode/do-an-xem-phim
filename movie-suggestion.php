@@ -98,6 +98,10 @@ if ($describe && $type) {
   <?php if (!empty($data['items'])): ?>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
       <?php foreach ($data['items'] as $movie): ?>
+        <?php
+          //$movieDetail = fetchData("https://phimapi.com/v1/api/phim/" . $movie['slug']);
+          //$movieType = $movieDetail['movie']['type'] ?? 'series';
+        ?>
         <div class="relative group">
           <div class="flex flex-col gap-2 group"
             href="/do-an-xem-phim/info.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>">
@@ -107,9 +111,23 @@ if ($describe && $type) {
                   class="border border-gray-800 h-full rounded-xl w-full absolute group-hover:brightness-75 inset-0 transition-all group-hover:scale-105"
                   src="<?= "https://phimimg.com/" . $movie['poster_url'] ?>" alt="<?= $movie['name'] ?>">
               </a>
-              <a href="/do-an-xem-phim/watching.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>"
-                class="text-white text-center absolute bottom-2 left-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">Xem
-                ngay</a>
+              <form class="watch-form" data-slug="<?= $movie['slug'] ?>" method="POST" action="watch_movie.php">
+                          <input type="hidden" name="name" value="<?= $movie['name'] ?>">
+                          <input type="hidden" name="slug" value="<?= $movie['slug'] ?>">
+                          <input type="hidden" name="poster" value="<?= "https://phimimg.com/" . $movie['poster_url'] ?>">
+                          <input type="hidden" name="thumbnail" value="<?= "https://phimimg.com/" . $movie['thumb_url'] ?>">
+                          <input type="hidden" name="quality" value="<?= $movie['quality'] ?>">
+                          <input type="hidden" name="lang" value="<?= $movie['lang'] ?>">
+                          <input type="hidden" name="episode" value="<?= htmlspecialchars($_GET['episode'] ?? '') ?>">
+                          <input type="hidden" name="type_movie" value="">
+                          <button type="button"
+                            class="watch-btn text-white text-center absolute bottom-2 left-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z" />
+                            </svg>
+                            Xem ngay
+                          </button>
+                        </form>
             </div>
             <span class="text-gray-50 text-xs group-hover:text-[#ffd875] lg:text-sm transition-all"
               style="-webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;"><?= $movie['name'] ?></span>
@@ -128,5 +146,3 @@ if ($describe && $type) {
     <p class="text-gray-400 mt-4">Không có phim nào.</p>
   <?php endif; ?>
 </div>
-
-?>

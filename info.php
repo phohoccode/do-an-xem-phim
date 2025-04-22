@@ -14,9 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user_id = $_SESSION['user_id'];
   $slug = $_POST['slug'] ?? '';
   $name = $_POST['name'] ?? '';
+  $quality = $_POST['quality'] ?? '';
+  $lang = $_POST['lang'] ?? '';
   $poster = $_POST['poster'] ?? '';
   $thumbnail = $_POST['thumbnail'] ?? '';
-  $type = $_POST['type'] ?? 'favorite';
+  $save_type = $_POST['type'] ?? 'favorite';
+  $movie_type = $_POST['movie_type'] ?? '';
   $action = $_POST['action'] ?? '';
 
   if (!$slug || !$action) {
@@ -25,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if ($action === 'save') {
-    $stmt = $conn->prepare("SELECT id FROM user_movies WHERE user_id = ? AND movie_slug = ? AND type = ?");
-    $stmt->bind_param("iss", $user_id, $slug, $type);
+    $stmt = $conn->prepare("SELECT id FROM user_movies WHERE user_id = ? AND movie_slug = ? AND save_type = ? AND movie_type = ?");
+    $stmt->bind_param("isss", $user_id, $slug, $save_type, $movie_type);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows === 0) {
-      $stmt = $conn->prepare("INSERT INTO user_movies (user_id, movie_slug, movie_name, movie_poster, movie_thumbnail, type) VALUES (?, ?, ?, ?, ?, ?)");
-      $stmt->bind_param("isssss", $user_id, $slug, $name, $poster, $thumbnail, $type);
+      $stmt = $conn->prepare("INSERT INTO user_movies (user_id, movie_slug, movie_name, movie_quality, movie_lang, movie_poster, movie_thumbnail, save_type, movie_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("issssssss", $user_id, $slug, $name, $quality, $lang, $poster, $thumbnail, $save_type, $movie_type);
       if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Phim đã được lưu.', 'saved' => true]);
       } else {
@@ -42,8 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       echo json_encode(['success' => false, 'message' => 'Phim đã có trong danh sách.', 'saved' => true]);
     }
   } elseif ($action === 'delete') {
-    $stmt = $conn->prepare("DELETE FROM user_movies WHERE user_id = ? AND movie_slug = ? AND type = ?");
-    $stmt->bind_param("iss", $user_id, $slug, $type);
+    $stmt = $conn->prepare("DELETE FROM user_movies WHERE user_id = ? AND movie_slug = ? AND save_type = ? AND movie_type = ?");
+    $stmt->bind_param("isss", $user_id, $slug, $save_type, $movie_type);
     if ($stmt->execute()) {
       echo json_encode(['success' => true, 'message' => 'Đã xóa phim khỏi danh sách.', 'saved' => false]);
     } else {
@@ -166,7 +169,7 @@ if ($describe && $type) {
 // Kiểm tra xem phim đã được lưu chưa (để cập nhật data-saved)
 $isSaved = false;
 if (isset($_SESSION['user_id'])) {
-  $stmt = $conn->prepare("SELECT id FROM user_movies WHERE user_id = ? AND movie_slug = ? AND type = 'favorite'");
+  $stmt = $conn->prepare("SELECT id FROM user_movies WHERE user_id = ? AND movie_slug = ? AND save_type = 'favorite'");
   $stmt->bind_param("is", $_SESSION['user_id'], $movie['slug']);
   $stmt->execute();
   $stmt->store_result();
@@ -198,19 +201,36 @@ if (isset($_SESSION['user_id'])) {
               alt="<?= $movie['name'] ?>">
           </div>
           <div class="flex justify-between items-center gap-4 mt-2">
-            <a href="/do-an-xem-phim/watching.php?name=<?= $movie['name'] ?>&slug=<?= $movie['slug'] ?>"
-              class="flex-1 watch-now-btn justify-center text-gray-50 text-center whitespace-nowrap flex items-center bg-blue-700 hover:bg-blue-80 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">
-              <svg class="w-[24px] h-[24px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                height="24" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
-                  clip-rule="evenodd" />
-              </svg>
-              Xem ngay</a>
+          <form method="POST" action="watch_movie.php" class="flex-[5]">
+                    <input type="hidden" name="name" value="<?= $movie['name'] ?>">
+                    <input type="hidden" name="slug" value="<?= $movie['slug'] ?>">
+                    <input type="hidden" name="poster" value="<?= $movie['poster_url'] ?>">
+                    <input type="hidden" name="thumbnail" value="<?= $movie['thumb_url'] ?>">
+                    <input type="hidden" name="quality" value="<?= $movie['quality'] ?>">
+                    <input type="hidden" name="lang" value="<?= $movie['lang'] ?>">
+                    <input type="hidden" name="episode" value="<?= htmlspecialchars($_GET['episode'] ?? '') ?>">
+                    <input type="hidden" name="type_movie" value="<?= $movie['type'] ?>">
+                    <button type="submit"
+                      class="w-full justify-center text-gray-50 text-center whitespace-nowrap flex items-center bg-blue-700 hover:bg-blue-80 font-medium rounded-lg text-sm px-3 py-2 focus:outline-none">
+                      <svg class="w-[24px] h-[24px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                          height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                              clip-rule="evenodd" />
+                      </svg>
+                      Xem ngay
+                    </button>
+                  </form>
             <button
               class="p-2 save-movie-btn border-none text-sm font-medium rounded-lg border transition-all duration-300
                 <?= $isSaved ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-white text-gray-900 hover:bg-gray-100' ?>"
-              data-saved="<?= $isSaved ? 'true' : 'false' ?>" data-slug="<?= $movie['slug'] ?>"
-              data-name="<?= $movie['name'] ?>" data-poster="<?= $posterUrl ?>" data-thumbnail="<?= $thumbUrl ?>">
+              data-saved="<?= $isSaved ? 'true' : 'false' ?>"
+              data-slug="<?= $movie['slug'] ?>"
+              data-name="<?= $movie['name'] ?>" 
+              data-poster="<?= $posterUrl ?>" 
+              data-thumbnail="<?= $thumbUrl ?>"
+              data-quality="<?= $movie['quality'] ?>"
+              data-lang="<?= $movie['lang'] ?>"
+              data-movie_type="<?= $movie['type']?>">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path
                   d="M7.833 2c-.507 0-.98.216-1.318.576A1.92 1.92 0 0 0 6 3.89V21a1 1 0 0 0 1.625.78L12 18.28l4.375 3.5A1 1 0 0 0 18 21V3.889c0-.481-.178-.954-.515-1.313A1.808 1.808 0 0 0 16.167 2H7.833Z" />
@@ -302,6 +322,29 @@ if (isset($_SESSION['user_id'])) {
         </div>
       </div>
     </div>
+    <?php if (!empty($episodes) && isset($episodes[0]["server_data"])): ?>
+  <div class="mt-6 p-4 rounded-2xl lg:backdrop-blur-lg lg:bg-[#282b3a8a]">
+    <h3 class="text-xl mb-4 text-white">Danh sách tập phim</h3>
+    <div class="episode-list flex flex-wrap gap-2">
+      <?php foreach ($episodes[0]["server_data"] as $episode): ?>
+        <form method="POST" action="watch_movie.php">
+          <input type="hidden" name="name" value="<?= $movie['name'] ?>">
+          <input type="hidden" name="slug" value="<?= $movie['slug'] ?>">
+          <input type="hidden" name="poster" value="<?= $movie['poster_url'] ?>">
+          <input type="hidden" name="thumbnail" value="<?= $movie['thumb_url'] ?>">
+          <input type="hidden" name="quality" value="<?= $movie['quality'] ?>">
+          <input type="hidden" name="lang" value="<?= $movie['lang'] ?>">
+          <input type="hidden" name="episode" value="<?= htmlspecialchars($episode['name']) ?>">
+          <button type="submit"
+            class="py-2.5 px-5 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">
+            <?= htmlspecialchars($episode['name']) ?>
+          </button>
+        </form>
+      <?php endforeach; ?>
+    </div>
+  </div>
+<?php endif; ?>
+
 
     <div class="mt-12">
       <div class="flex items-center gap-1 text-gray-100 text-2xl mb-4">
@@ -339,11 +382,19 @@ if (isset($_SESSION['user_id'])) {
           const name = btn.dataset.name;
           const poster = btn.dataset.poster;
           const thumbnail = btn.dataset.thumbnail;
-
+          const quality = btn.dataset.quality;
+          const lang = btn.dataset.lang;
+          const movie_type = btn.dataset.movie_type;
           const action = isSaved ? 'delete' : 'save';
           const formData = new URLSearchParams({
-            slug,
             action,
+            slug,
+            name,
+            poster,
+            thumbnail,
+            quality,
+            lang,
+            movie_type,
             type: 'favorite'
           });
 
