@@ -32,6 +32,7 @@ $movieCount = $countResult->fetch_assoc()['total'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='img/logo.png' rel='icon' type='image/x-icon' />
     <title>Trang cá nhân</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/popup.css">
@@ -114,109 +115,7 @@ $movieCount = $countResult->fetch_assoc()['total'];
         </div>
     </div>
 
-    <script>
-        function openModal() {
-            document.getElementById('changePasswordModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('changePasswordModal').classList.add('hidden');
-        }
-
-
-        // Đổi tên người dùng (AJAX)
-    document.getElementById('usernameForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Ngừng việc gửi form
-        const newUsername = document.querySelector('input[name="new_username"]').value;
-
-        fetch('update_username.php', {
-            method: 'POST',
-            body: new URLSearchParams({
-                'new_username': newUsername
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            showPopup(data.message);
-            if (data.success) {
-                document.querySelector('input[name="new_username"]').value = newUsername;
-            }
-        })
-        .catch(error => {
-            console.error('Lỗi:', error);
-            showPopup('Có lỗi xảy ra khi đổi tên.');
-        });
-    });
-
-    // Đổi mật khẩu (AJAX)
-document.getElementById('changePasswordForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Ngừng việc gửi form
-    const currentPassword = document.querySelector('input[name="current_password"]').value;
-    const newPassword = document.querySelector('input[name="new_password"]').value;
-
-    fetch('change_password.php', {
-        method: 'POST',
-        body: new URLSearchParams({
-            'current_password': currentPassword,
-            'new_password': newPassword
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showPopup(data.message); // Hiển thị thông báo thành công
-            closeModal();
-        } else {
-            showPopup(data.message); // Hiển thị thông báo lỗi
-            openModal(); // Mở lại modal nếu có lỗi
-        }
-    })
-    .catch(error => {
-        console.error('Lỗi:', error);
-        showPopup('Có lỗi xảy ra khi đổi mật khẩu.');
-    });
-});
-
-
-        //(AJAX) upload ảnh
-        document.getElementById('avatarInput').addEventListener('change', function() {
-            const formData = new FormData();
-            formData.append('avatar', this.files[0]);
-            formData.append('upload_avatar', 1);
-
-            fetch('upload_avatar.php', {
-                method: 'POST',
-                body: formData
-                })
-            .then(response => response.json())
-            .then(data => {
-            if (data.success) {
-                // Cập nhật ảnh avatar
-                document.getElementById('userAvatar').src = data.new_avatar + '?' + new Date().getTime();
-                }
-                // Hiện popup
-                showPopup(data.message || 'Cập nhật ảnh đại diện thất bại.');
-                })
-            .catch(error => {
-                console.error('Lỗi:', error);
-                showPopup('Có lỗi xảy ra.');
-            });
-        });
-
-        //Thông báo
-        function showPopup(message) {
-            const popup = document.getElementById('popup');
-            const popupMessage = document.getElementById('popupMessage');
-            popupMessage.textContent = message;
-            popup.classList.remove('hidden');
-            popup.classList.add('show');
-            }
-
-        function closePopup() {
-            const popup = document.getElementById('popup');
-            popup.classList.remove('show');
-            popup.classList.add('hidden');
-            }
-    </script>
+    <script src="js/profile.js"></script>
+    <script src="js/notifi.js"></script>
 </body>
 </html>

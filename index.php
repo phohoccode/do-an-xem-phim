@@ -33,6 +33,7 @@ foreach ($categories as $type => $className) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='img/logo.png' rel='icon' type='image/x-icon' />
   <title>Trang chủ</title>
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
